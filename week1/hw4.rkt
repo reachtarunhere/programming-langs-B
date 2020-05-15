@@ -26,5 +26,11 @@
                 [current (car evaled)]
                 [new-s (cdr evaled)])
            (cons current (stream-for-n-steps new-s (- n 1))))))
+
+
+(define funny-number-stream
+  (letrec ([five-wrapper (lambda (x) (if (eq? (remainder x 5) 0) (* -1 x) x))]
+           [f (lambda (x) (cons (five-wrapper x) (lambda () (f (+ x 1)))))])
+    (lambda () (f 1))))
            
     
