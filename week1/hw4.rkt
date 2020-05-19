@@ -46,4 +46,9 @@
          [new-stream (cdr one-realized)])
     (lambda () (cons (cons 0 current) (lambda () ((stream-add-zero new-stream)))))))
 
+
+(define (cycle-lists xs ys)
+  (letrec ([f (lambda (x) (cons (cons (list-nth-mod xs x) (list-nth-mod ys x)) (lambda () (f (+ 1 x)))))])
+    (lambda () (f 0))))
+
     
