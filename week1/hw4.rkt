@@ -32,5 +32,9 @@
   (letrec ([five-wrapper (lambda (x) (if (eq? (remainder x 5) 0) (* -1 x) x))]
            [f (lambda (x) (cons (five-wrapper x) (lambda () (f (+ x 1)))))])
     (lambda () (f 1))))
-           
-    
+
+
+(define dan-then-dog
+  (letrec ([flipper (lambda (img) (if (eq? img "dan.jpg") "dog.jpg" "dan.jpg"))]
+           [f (lambda (x) (cons x (lambda () (f (flipper x)))))])
+    (lambda () (f "dan.jpg"))))
