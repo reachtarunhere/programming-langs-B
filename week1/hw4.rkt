@@ -38,3 +38,12 @@
   (letrec ([flipper (lambda (img) (if (eq? img "dan.jpg") "dog.jpg" "dan.jpg"))]
            [f (lambda (x) (cons x (lambda () (f (flipper x)))))])
     (lambda () (f "dan.jpg"))))
+
+
+(define (stream-add-zero s)
+  (let* ([one-realized (s)]
+         [current (car one-realized)]
+         [new-stream (cdr one-realized)])
+    (lambda () (cons (cons 0 current) (lambda () ((stream-add-zero new-stream)))))))
+
+    
